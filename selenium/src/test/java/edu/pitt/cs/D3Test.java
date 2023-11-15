@@ -40,7 +40,7 @@ public class D3Test {
     driver = new ChromeDriver(options);
 
     //driver = new ChromeDriver();
-    
+
     js = (JavascriptExecutor) driver;
     vars = new HashMap<String, Object>();
   }
@@ -51,7 +51,7 @@ public class D3Test {
   }
   @Test
   public void tEST1LINKS() {
-    driver.get("https://cs1632.appspot.com/");
+    driver.get("http://localhost:8080.appspot.com/");
     {
       List<WebElement> elements = driver.findElements(By.linkText("Reset"));
       assert(elements.size() > 0);
@@ -61,13 +61,13 @@ public class D3Test {
       String attribute = element.getAttribute("href");
       vars.put("x", attribute);
     }
-    assertEquals(vars.get("x").toString(), "https://cs1632.appspot.com/reset");
+    assertEquals(vars.get("x").toString(), "http://localhost:8080.appspot.com/reset");
   }
   @Test
   public void tEST2RESET() {
-    driver.get("https://cs1632.appspot.com/");
+    driver.get("http://localhost:8080.appspot.com/");
     js.executeScript("document.cookie = \"1=true\";document.cookie = \"2=true\";document.cookie = \"3=false\";");
-    driver.get("https://cs1632.appspot.com/");
+    driver.get("http://localhost:8080.appspot.com/");
     assertThat(driver.findElement(By.xpath("//div/ul/li")).getText(), is("Rented out"));
     assertThat(driver.findElement(By.xpath("//div/ul/li[2]")).getText(), is("Rented out"));
     assertThat(driver.findElement(By.xpath("//div/ul/li[3]")).getText(), is("ID 3. Mistoffelees"));
@@ -78,7 +78,7 @@ public class D3Test {
   }
   @Test
   public void tEST3CATALOG() {
-    driver.get("https://cs1632.appspot.com/");
+    driver.get("http://localhost:8080.appspot.com/");
     {
       List<WebElement> elements = driver.findElements(By.xpath("//li[2]/img"));
       assert(elements.size() > 0);
@@ -88,20 +88,20 @@ public class D3Test {
       String attribute = element.getAttribute("src");
       vars.put("x", attribute);
     }
-    assertEquals(vars.get("x").toString(), "https://cs1632.appspot.com/images/cat2.jpg");
+    assertEquals(vars.get("x").toString(), "http://localhost:8080.appspot.com/images/cat2.jpg");
   }
   @Test 
   public void tEST4LISTING() {
-    driver.get("https://cs1632.appspot.com/");
+    driver.get("http://localhost:8080.appspot.com/");
     js.executeScript("document.cookie = \"1=false\";document.cookie = \"2=false\";document.cookie = \"3=false\";");
-    driver.get("https://cs1632.appspot.com/");
+    driver.get("http://localhost:8080.appspot.com/");
     assertThat(driver.findElement(By.xpath("//div[@id=\'listing\']/ul/li")).getText(), is("ID 1. Jennyanydots"));
     assertThat(driver.findElement(By.xpath("//div[@id=\'listing\']/ul/li[2]")).getText(), is("ID 2. Old Deuteronomy"));
     assertThat(driver.findElement(By.xpath("//div[@id=\'listing\']/ul/li[3]")).getText(), is("ID 3. Mistoffelees"));
   }
   @Test
   public void tEST5RENTACAT() {
-    driver.get("https://cs1632.appspot.com/rent-a-cat");
+    driver.get("http://localhost:8080.appspot.com/rent-a-cat");
     {
       List<WebElement> elements = driver.findElements(By.xpath("//button[@onclick=\'rentSubmit()\']"));
       assert(elements.size() > 0);
@@ -131,7 +131,7 @@ public class D3Test {
   }
   @Test
   public void tEST6RENT() {
-    driver.get("https://cs1632.appspot.com/");
+    driver.get("http://localhost:8080.appspot.com/");
     js.executeScript("document.cookie = \"1=false\";document.cookie = \"2=false\";document.cookie = \"3=false\";");
     driver.findElement(By.xpath("//li[2]/a")).click();
     assertThat(driver.findElement(By.xpath("//div/ul/li")).getText(), is("ID 1. Jennyanydots"));
@@ -147,7 +147,7 @@ public class D3Test {
   }
   @Test
   public void tEST7RETURN() {
-    driver.get("https://cs1632.appspot.com/");
+    driver.get("http://localhost:8080.appspot.com/");
     js.executeScript("document.cookie = \"1=false\";document.cookie = \"2=true\";document.cookie = \"3=false\";");
     driver.findElement(By.xpath("//li[2]/a")).click();
     assertThat(driver.findElement(By.xpath("//div/ul/li")).getText(), is("ID 1. Jennyanydots"));
@@ -163,13 +163,13 @@ public class D3Test {
   }
   @Test
   public void tEST8FEEDACAT() {
-    driver.get("https://cs1632.appspot.com/");
+    driver.get("http://localhost:8080.appspot.com/");
     driver.findElement(By.linkText("Feed-A-Cat")).click();
     assertThat(driver.findElement(By.xpath("//button[@onclick=\'feedSubmit()\']")).getText(), is("Feed"));
   }
   @Test
   public void tEST9FEED() {
-    driver.get("https://cs1632.appspot.com/");
+    driver.get("http://localhost:8080.appspot.com/");
     js.executeScript("document.cookie = \"1=false\";document.cookie = \"2=false\";document.cookie = \"3=false\";");
     driver.findElement(By.linkText("Feed-A-Cat")).click();
     assertThat(driver.findElement(By.xpath("//div/ul/li")).getText(), is("ID 1. Jennyanydots"));
@@ -183,7 +183,7 @@ public class D3Test {
   }
   @Test
   public void tEST10GREETACAT() {
-    driver.get("https://cs1632.appspot.com/");
+    driver.get("http://localhost:8080.appspot.com/");
     js.executeScript("document.cookie = \"1=false; path=/greet-a-cat\";document.cookie = \"2=false; path=/greet-a-cat\";document.cookie = \"3=false; path=/greet-a-cat\";");
     driver.findElement(By.linkText("Greet-A-Cat")).click();
     assertThat(driver.findElement(By.xpath("//div/ul/li")).getText(), is("ID 1. Jennyanydots"));
@@ -193,9 +193,9 @@ public class D3Test {
   }
   @Test
   public void tEST11GREETACATWITHNAME() {
-    driver.get("https://cs1632.appspot.com/greet-a-cat/Jennyanydots");
+    driver.get("http://localhost:8080.appspot.com/greet-a-cat/Jennyanydots");
     js.executeScript("document.cookie = \"1=false; path=/greet-a-cat/Jennyanydots\";document.cookie = \"2=false; path=/greet-a-cat/Jennyanydots\";document.cookie = \"3=false; path=/greet-a-cat/Jennyanydots\";");
-    driver.get("https://cs1632.appspot.com/greet-a-cat/Jennyanydots");
+    driver.get("http://localhost:8080.appspot.com/greet-a-cat/Jennyanydots");
     assertThat(driver.findElement(By.xpath("//div/ul/li")).getText(), is("ID 1. Jennyanydots"));
     assertThat(driver.findElement(By.xpath("//div/ul/li[2]")).getText(), is("ID 2. Old Deuteronomy"));
     assertThat(driver.findElement(By.xpath("//div/ul/li[3]")).getText(), is("ID 3. Mistoffelees"));
@@ -203,7 +203,7 @@ public class D3Test {
   }
   @Test
   public void tEST12RENT() {
-    driver.get("https://cs1632.appspot.com/");
+    driver.get("http://localhost:8080.appspot.com/");
     js.executeScript("document.cookie = \"1=true\";document.cookie = \"2=false\";document.cookie = \"3=false\";");
     driver.findElement(By.xpath("//li[2]/a")).click();
     assertThat(driver.findElement(By.xpath("//div/ul/li")).getText(), is("Rented out"));
@@ -219,7 +219,7 @@ public class D3Test {
   }
   @Test
   public void tEST13RENT() {
-    driver.get("https://cs1632.appspot.com/");
+    driver.get("http://localhost:8080.appspot.com/");
     js.executeScript("document.cookie = \"1=false\";document.cookie = \"2=false\";document.cookie = \"3=false\";");
     driver.findElement(By.xpath("//li[2]/a")).click();
     assertThat(driver.findElement(By.xpath("//div/ul/li")).getText(), is("ID 1. Jennyanydots"));
@@ -235,7 +235,7 @@ public class D3Test {
   }
   @Test
   public void tEST14RETURN() {
-    driver.get("https://cs1632.appspot.com/");
+    driver.get("http://localhost:8080.appspot.com/");
     js.executeScript("document.cookie = \"1=false\";document.cookie = \"2=false\";document.cookie = \"3=false\";");
     driver.findElement(By.xpath("//li[2]/a")).click();
     assertThat(driver.findElement(By.xpath("//div/ul/li")).getText(), is("ID 1. Jennyanydots"));
@@ -251,7 +251,7 @@ public class D3Test {
   }
   @Test
   public void tEST15RETURN() {
-    driver.get("https://cs1632.appspot.com/");
+    driver.get("http://localhost:8080.appspot.com/");
     js.executeScript("document.cookie = \"1=false\";document.cookie = \"2=false\";document.cookie = \"3=false\";");
     driver.findElement(By.xpath("//li[2]/a")).click();
     assertThat(driver.findElement(By.xpath("//div/ul/li")).getText(), is("ID 1. Jennyanydots"));
@@ -267,7 +267,7 @@ public class D3Test {
   }
   @Test
   public void tEST16FEEDACAT() {
-    driver.get("https://cs1632.appspot.com/");
+    driver.get("http://localhost:8080.appspot.com/");
     driver.findElement(By.linkText("Feed-A-Cat")).click();
     {
       WebElement element = driver.findElement(By.id("catnips"));
@@ -277,7 +277,7 @@ public class D3Test {
   }
   @Test
   public void tEST17FEED() {
-    driver.get("https://cs1632.appspot.com/");
+    driver.get("http://localhost:8080.appspot.com/");
     js.executeScript("document.cookie = \"1=true\";document.cookie = \"2=false\";document.cookie = \"3=false\";");
     driver.findElement(By.linkText("Feed-A-Cat")).click();
     assertThat(driver.findElement(By.xpath("//div/ul/li")).getText(), is("Rented out"));
@@ -291,7 +291,7 @@ public class D3Test {
   }
   @Test
   public void tEST18FEED() {
-    driver.get("https://cs1632.appspot.com/");
+    driver.get("http://localhost:8080.appspot.com/");
     js.executeScript("document.cookie = \"1=false\";document.cookie = \"2=false\";document.cookie = \"3=false\";");
     driver.findElement(By.linkText("Feed-A-Cat")).click();
     assertThat(driver.findElement(By.xpath("//div/ul/li")).getText(), is("ID 1. Jennyanydots"));
@@ -305,7 +305,7 @@ public class D3Test {
   }
   @Test
   public void tEST19CATALOG() {
-    driver.get("https://cs1632.appspot.com/");
+    driver.get("http://localhost:8080.appspot.com/");
     {
       List<WebElement> elements = driver.findElements(By.xpath("//li/img"));
       assert(elements.size() > 0);
@@ -315,11 +315,11 @@ public class D3Test {
       String attribute = element.getAttribute("src");
       vars.put("x", attribute);
     }
-    assertEquals(vars.get("x").toString(), "https://cs1632.appspot.com/images/cat1.jpg");
+    assertEquals(vars.get("x").toString(), "http://localhost:8080.appspot.com/images/cat1.jpg");
   }
   @Test
   public void tEST20CATALOG() {
-    driver.get("https://cs1632.appspot.com/");
+    driver.get("http://localhost:8080.appspot.com/");
     {
       List<WebElement> elements = driver.findElements(By.xpath("//li[3]/img"));
       assert(elements.size() > 0);
@@ -329,11 +329,11 @@ public class D3Test {
       String attribute = element.getAttribute("src");
       vars.put("x", attribute);
     }
-    assertEquals(vars.get("x").toString(), "https://cs1632.appspot.com/images/cat3.jpg");
+    assertEquals(vars.get("x").toString(), "http://localhost:8080.appspot.com/images/cat3.jpg");
   }
   @Test
   public void tEST21LINKS() {
-    driver.get("https://cs1632.appspot.com/");
+    driver.get("http://localhost:8080.appspot.com/");
     {
       List<WebElement> elements = driver.findElements(By.linkText("Catalog"));
       assert(elements.size() > 0);
@@ -343,11 +343,11 @@ public class D3Test {
       String attribute = element.getAttribute("href");
       vars.put("x", attribute);
     }
-    assertEquals(vars.get("x").toString(), "https://cs1632.appspot.com/");
+    assertEquals(vars.get("x").toString(), "http://localhost:8080.appspot.com/");
   }
   @Test
   public void tEST22LINKS() {
-    driver.get("https://cs1632.appspot.com/");
+    driver.get("http://localhost:8080.appspot.com/");
     {
       List<WebElement> elements = driver.findElements(By.linkText("Feed-A-Cat"));
       assert(elements.size() > 0);
@@ -357,11 +357,11 @@ public class D3Test {
       String attribute = element.getAttribute("href");
       vars.put("x", attribute);
     }
-    assertEquals(vars.get("x").toString(), "https://cs1632.appspot.com/feed-a-cat");
+    assertEquals(vars.get("x").toString(), "http://localhost:8080.appspot.com/feed-a-cat");
   }
   @Test
   public void tEST23LINKS() {
-    driver.get("https://cs1632.appspot.com/");
+    driver.get("http://localhost:8080.appspot.com/");
     {
       List<WebElement> elements = driver.findElements(By.linkText("Feed-A-Cat"));
       assert(elements.size() > 0);
@@ -371,11 +371,11 @@ public class D3Test {
       String attribute = element.getAttribute("href");
       vars.put("x", attribute);
     }
-    assertEquals(vars.get("x").toString(), "https://cs1632.appspot.com/feed-a-cat");
+    assertEquals(vars.get("x").toString(), "http://localhost:8080.appspot.com/feed-a-cat");
   }
   @Test
   public void tEST24LINKS() {
-    driver.get("https://cs1632.appspot.com/");
+    driver.get("http://localhost:8080.appspot.com/");
     {
       List<WebElement> elements = driver.findElements(By.linkText("Greet-A-Cat"));
       assert(elements.size() > 0);
@@ -385,17 +385,17 @@ public class D3Test {
       String attribute = element.getAttribute("href");
       vars.put("x", attribute);
     }
-    assertEquals(vars.get("x").toString(), "https://cs1632.appspot.com/greet-a-cat");
+    assertEquals(vars.get("x").toString(), "http://localhost:8080.appspot.com/greet-a-cat");
   }
   @Test
   public void tEST25LINKS() {
-    driver.get("https://cs1632.appspot.com/");
+    driver.get("http://localhost:8080.appspot.com/");
     vars.put("links", js.executeScript("return [\"/\", \"/rent-a-cat\", \"/feed-a-cat\", \"/greet-a-cat\", \"/reset\"]"));
     vars.put("titles", js.executeScript("return [\"Catalog\", \"Rent-A-Cat\", \"Feed-A-Cat\", \"Greet-A-Cat\", \"Reset\"]"));
     ArrayList collectionLinks = (ArrayList) vars.get("links");
     for (int iLink = 0; iLink < collectionLinks.size() - 1; iLink++) {
       vars.put("link", collectionLinks.get(iLink));
-      driver.get("https://cs1632.appspot.com" + collectionLinks.get(iLink).toString());
+      driver.get("http://localhost:8080.appspot.com" + collectionLinks.get(iLink).toString());
       ArrayList collectionTitles = (ArrayList) vars.get("titles");
       for (int iTitle = 0; iTitle < collectionTitles.size() - 1; iTitle++) {
         vars.put("title", collectionTitles.get(iTitle));
@@ -408,12 +408,12 @@ public class D3Test {
   }
   @Test
   public void tEST26LISTING() {
-    driver.get("https://cs1632.appspot.com/");
+    driver.get("http://localhost:8080.appspot.com/");
     vars.put("links", js.executeScript("return [\"/\", \"/rent-a-cat\", \"/feed-a-cat\", \"/greet-a-cat\", \"/reset\"]"));
     ArrayList collectionLinks = (ArrayList) vars.get("links");
     for (int iLink = 0; iLink < collectionLinks.size() - 1; iLink++) {
       vars.put("link", collectionLinks.get(iLink));
-      driver.get("https://cs1632.appspot.com" + collectionLinks.get(iLink).toString());
+      driver.get("http://localhost:8080.appspot.com" + collectionLinks.get(iLink).toString());
       {
         List<WebElement> elements = driver.findElements(By.xpath("//div[@id=\'listing\']/ul/li"));
         assert(elements.size() > 0);
@@ -434,9 +434,9 @@ public class D3Test {
   }
   @Test
   public void tEST27LISTING() {
-    driver.get("https://cs1632.appspot.com/");
+    driver.get("http://localhost:8080.appspot.com/");
     js.executeScript("document.cookie = \"1=false\";document.cookie = \"2=true\";document.cookie = \"3=false\";");
-    driver.get("https://cs1632.appspot.com/");
+    driver.get("http://localhost:8080.appspot.com/");
     assertThat(driver.findElement(By.xpath("//div[@id=\'listing\']/ul/li")).getText(), is("ID 1. Jennyanydots"));
     assertThat(driver.findElement(By.xpath("//div[@id=\'listing\']/ul/li[2]")).getText(), is("Rented out"));
     assertThat(driver.findElement(By.xpath("//div[@id=\'listing\']/ul/li[3]")).getText(), is("ID 3. Mistoffelees"));
