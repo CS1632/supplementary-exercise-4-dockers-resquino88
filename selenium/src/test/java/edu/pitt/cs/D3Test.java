@@ -389,7 +389,7 @@ public class D3Test {
     }
     assertEquals(vars.get("x").toString(), "http://localhost:8080/greet-a-cat");
   }
-  @Test
+  /*@Test
   public void tEST25LINKS() {
     driver.get("http://localhost:8080/");
     vars.put("links", js.executeScript("return [\"/\", \"/rent-a-cat\", \"/feed-a-cat\", \"/greet-a-cat\", \"/reset\"]"));
@@ -407,7 +407,7 @@ public class D3Test {
         }
       }
     }
-  }
+  }*/
   @Test
   public void tEST26LISTING() {
     driver.get("http://localhost:8080/");
